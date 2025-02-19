@@ -1,5 +1,7 @@
 require('dotenv').config();
 const Web3 = require('web3');
+const TelegramBot = require('node-telegram-bot-api');
+const fs = require('fs');
 
 console.log("WS_RPC_URL:", process.env.WS_RPC_URL); // Debugging line
 
