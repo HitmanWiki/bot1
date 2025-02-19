@@ -1,9 +1,15 @@
 require('dotenv').config();
 const Web3 = require('web3');
-const TelegramBot = require('node-telegram-bot-api');
-const fs = require('fs');
 
-const web3 = new Web3(new Web3.providers.WebsocketProvider(process.env.WS_RPC_URL));
+console.log("WS_RPC_URL:", process.env.WS_RPC_URL); // Debugging line
+
+const wsProvider = process.env.WS_RPC_URL;
+if (!wsProvider || wsProvider === "undefined") {
+    throw new Error("WS_RPC_URL is not defined. Check Railway environment variables.");
+}
+
+const web3 = new Web3(new Web3.providers.WebsocketProvider(wsProvider));
+console.log("Connected to WebSocket:", wsProvider);
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: false });
 
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
